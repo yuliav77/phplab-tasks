@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "files": [
+            "src/01-basics.php"
+        ]
+    },
+    "require": {
+        "php": "^7.3",
+        "phpunit/phpunit": "^9.2"
+    }
+}
