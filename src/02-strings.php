@@ -28,7 +28,7 @@ function mirrorMultibyteString(string $input)
 {
 	$array = explode(' ',$input);
 	foreach ($array as $elem){
-		$reversed = array_reverse(preg_split('/(?<!^)(?!$)/u', $elem));
+		$reversed = array_reverse(preg_split('//u', $elem));
 		$newstring .= implode($reversed) . " ";
 	}
 	return rtrim($newstring);
