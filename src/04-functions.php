@@ -35,9 +35,11 @@ function sayHelloArgument($arg)
  */
 function sayHelloArgumentWrapper($arg)
 {
-    // put your code here
-
-    return sayHelloArgument($arg);
+	$argType = getType($arg);
+	if ($argType!='boolean' && $argType!='string' && $argType!="integer" && $argType!="double") {
+        throw new InvalidArgumentException('Argument is not: number, string or bool');
+    }
+	return sayHelloArgument($arg);
 }
 
 /**
@@ -67,7 +69,12 @@ function countArguments()
  * @return array
  * @throws InvalidArgumentException
  */
-function countArgumentsWrapper()
-{
-    // put your code here
+function countArgumentsWrapper() {
+    $argList = func_get_args();
+    foreach ($argList as $arg) {
+        if (getType($arg) != "string"){
+            throw new InvalidArgumentException('All arguments should be string.');
+        }
+    }
+    return countArguments(...$argList);
 }
