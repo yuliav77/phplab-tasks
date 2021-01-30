@@ -9,8 +9,8 @@
  */
 function snakeCaseToCamelCase(string $input)
 {
-	$array = explode('_', $input);
-	foreach ($array as $elem) {
+	$wordsArray = explode('_', $input);
+	foreach ($wordsArray as $elem) {
 		$resultString .= ucfirst($elem);
 	}
 	return lcfirst($resultString);
@@ -26,12 +26,12 @@ function snakeCaseToCamelCase(string $input)
  */
 function mirrorMultibyteString(string $input)
 {
-	$array = explode(' ',$input);
-	foreach ($array as $elem){
-		$reversed = array_reverse(preg_split('//u', $elem));
-		$newstring .= implode($reversed) . " ";
+	$wordsArray = explode(' ',$input);
+	foreach ($wordsArray as $elem){
+		$reversedArray = array_reverse(preg_split('//u', $elem));
+		$resultString .= implode($reversedArray) . " ";
 	}
-	return rtrim($newstring);
+	return rtrim($resultString);
 }
 
 /**
@@ -53,7 +53,5 @@ function getBrandName(string $noun)
 	if ($noun[0] == $noun[strlen($noun)-1]) {
 		return ucfirst($noun . substr($noun,1));
 	}
-	else {
-		return ("The " . ucfirst($noun));
-	} 
+	return ("The " . ucfirst($noun));
 }
