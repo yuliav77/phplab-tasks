@@ -26,12 +26,20 @@ function snakeCaseToCamelCase(string $input)
  */
 function mirrorMultibyteString(string $input)
 {
-	$wordsArray = explode(' ',$input);
-	foreach ($wordsArray as $elem){
-		$reversedArray = array_reverse(preg_split('//u', $elem));
-		$resultString .= implode($reversedArray) . " ";
-	}
-	return rtrim($resultString);
+    $coding = mb_detect_encoding($input);
+    $wordsArray = explode(' ', $input);
+    $reversedWordsArray = array_map(
+        function($word) use ($coding)
+        {
+            $reversedWord = '';
+            for ($i = mb_strlen($word, $coding); $i >= 0; $i--) {
+                $reversedWord .= (mb_substr($word, $i, 1, $coding));
+            }
+            return ($reversedWord);
+        },
+        $wordsArray);
+    $resultString = implode(" ", $reversedWordsArray);
+    return ($resultString);
 }
 
 /**
