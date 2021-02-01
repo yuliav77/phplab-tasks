@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class СountArgumentsWrapperTest extends TestCase
+class CountArgumentsWrapperTest extends TestCase
 {
     /**
      * @dataProvider negativeDataProvider
