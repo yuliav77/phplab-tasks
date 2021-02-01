@@ -10,11 +10,11 @@
 function snakeCaseToCamelCase(string $input)
 {
     $resultString = '';
-	$wordsArray = explode('_', $input);
-	foreach ($wordsArray as $elem) {
-		$resultString .= ucfirst($elem);
-	}
-	return lcfirst($resultString);
+    $wordsArray = explode('_', $input);
+    foreach ($wordsArray as $elem) {
+        $resultString .= ucfirst($elem);
+    }
+    return lcfirst($resultString);
 }
 
 /**
