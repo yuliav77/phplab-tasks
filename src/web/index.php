@@ -11,7 +11,7 @@ function setUrl(string $filterName, string $filterValue):string
         $getArray["page"] = 1;
     }
     $params = "/?" . http_build_query($getArray);
-    return($params);
+    return ($params);
 }
 
 // Filtering
@@ -21,14 +21,14 @@ function setUrl(string $filterName, string $filterValue):string
  * (see Filtering tasks 1 and 2 below)
  */
 if (isset($_GET['filter_by_first_letter'])) {
-        $airports = array_filter($airports, function ($value) {
-            return ($value['name'][0] == $_GET['filter_by_first_letter']);
-        });
+    $airports = array_filter($airports, function ($value) {
+        return ($value['name'][0] == $_GET['filter_by_first_letter']);
+    });
 }
 if (isset($_GET['filter_by_state']))  {
-        $airports = array_filter($airports, function ($value) {
-            return ($value['state'] == $_GET['filter_by_state']);
-        });
+    $airports = array_filter($airports, function ($value) {
+        return ($value['state'] == $_GET['filter_by_state']);
+    });
 }
 
 
@@ -60,6 +60,7 @@ $recordsPerPage = 5;
 $countPages = ceil(count($airports)/$recordsPerPage);
 $countPageNeighbors = 2;
 $pageFrom = (($page - $countPageNeighbors) > 0) ? ($page - $countPageNeighbors) : 1 ;
+$pagesToShow = [];
 
 for ($i = $pageFrom; $i < $pageFrom + $countPageNeighbors * 2 + 1; $i++) {
     if ($i <= $countPages) {
@@ -67,11 +68,15 @@ for ($i = $pageFrom; $i < $pageFrom + $countPageNeighbors * 2 + 1; $i++) {
     }
 }
 if (!in_array(1, $pagesToShow)) {
-    ($pageFrom >= 3) ? array_unshift($pagesToShow, 1, "skip") : array_unshift($pagesToShow, 1);
+    ($pageFrom >= 3) ?
+        array_unshift($pagesToShow, 1, "skip") :
+        array_unshift($pagesToShow, 1);
 }
 
 if (!in_array($countPages, $pagesToShow)) {
-    (($countPages - ($pageFrom + $countPageNeighbors * 2)) >= 2) ? array_push($pagesToShow, "skip", $countPages) : array_push($pagesToShow, $countPages);
+    (($countPages - ($pageFrom + $countPageNeighbors * 2)) >= 2) ?
+        array_push($pagesToShow, "skip", $countPages) :
+        array_push($pagesToShow, $countPages);
 }
 
 $airports_to_show = array_slice($airports, ($page-1)*$recordsPerPage, $recordsPerPage);
@@ -148,7 +153,11 @@ $airports_to_show = array_slice($airports, ($page-1)*$recordsPerPage, $recordsPe
         <tr>
             <td><?= $airport['name'] ?></td>
             <td><?= $airport['code'] ?></td>
-            <td><a href="<?= setUrl('filter_by_state', $airport['state']) ?>"><?= $airport['state'] ?></a></td>
+            <td>
+                <a href="<?= setUrl('filter_by_state', $airport['state']) ?>">
+                    <?= $airport['state'] ?>
+                </a>
+            </td>
             <td><?= $airport['city'] ?></td>
             <td><?= $airport['address'] ?></td>
             <td><?= $airport['timezone'] ?></td>
@@ -173,7 +182,9 @@ $airports_to_show = array_slice($airports, ($page-1)*$recordsPerPage, $recordsPe
                 <?php if ($i == 'skip'): ?>
                     <li class="px-2">...</li>
                     <?php else: ?>
-                    <li class="page-item <?= $i==$page ? ' active' : "" ?>"><a class="page-link" href="<?= setUrl('page', $i) ?>"><?= $i ?></a></li>
+                    <li class="page-item <?= $i==$page ? ' active' : "" ?>">
+                        <a class="page-link" href="<?= setUrl('page', $i) ?>"><?= $i ?></a>
+                    </li>
                 <?php endif; ?>
             <?php endforeach; ?>
         </ul>
