@@ -127,7 +127,7 @@ class Calculator
     public function undo()
     {
         // TODO implement undo logic here
-
+        $lastIntent = array_pop($this->intents);
         return $this;
     }
 
@@ -139,7 +139,8 @@ class Calculator
     public function replay()
     {
         // TODO implement replay logic here
-
+        $countIntents = count($this->intents);
+        $this->intents[] = $this->intents[$countIntents-1];
         return $this;
     }
 
