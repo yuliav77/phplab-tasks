@@ -17,7 +17,7 @@ foreach (require_once('../web/airports.php') as $item) {
     $sth->execute(['name' => $item['city']]);
     $city = $sth->fetch();
 
-    // If result is empty - we need to INSERT it
+    // If result is empty - we need to INSERT city
     if (!$city) {
         $sth = $pdo->prepare('INSERT INTO cities (name) VALUES (:name)');
         $sth->execute(['name' => $item['city']]);
