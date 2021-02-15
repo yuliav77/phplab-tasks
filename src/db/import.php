@@ -23,10 +23,10 @@ foreach (require_once('../web/airports.php') as $item) {
         $sth->execute(['name' => $item['city']]);
 
         // We will use this variable to INSERT airport
-        $city_id = $pdo->lastInsertId();
+        $cityId = $pdo->lastInsertId();
     } else {
         // We will use this variable to INSERT airport
-        $city_id = $city['id'];
+        $cityId = $city['id'];
     }
 
     // TODO States
