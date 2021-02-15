@@ -43,6 +43,8 @@ $uniqueFirstLetters = ['A', 'B', 'C'];
 /**
  * Build a SELECT query to DB with all filters / sorting / pagination
  * and set the result to $airports variable
+ *
+ * For city_name and state_name fields you can use alias https://www.mysqltutorial.org/mysql-alias/
  */
 $airports = [];
 ?>
@@ -117,8 +119,8 @@ $airports = [];
         <tr>
             <td><?= $airport['name'] ?></td>
             <td><?= $airport['code'] ?></td>
-            <td><a href="#"><?= $airport['state'] ?></a></td>
-            <td><?= $airport['city'] ?></td>
+            <td><a href="#"><?= $airport['state_name'] ?></a></td>
+            <td><?= $airport['city_name'] ?></td>
             <td><?= $airport['address'] ?></td>
             <td><?= $airport['timezone'] ?></td>
         </tr>
