@@ -50,5 +50,11 @@ foreach (require_once('../web/airports.php') as $item) {
 	
     // TODO Airports
 	$sth = $pdo->prepare('INSERT INTO airports (name, code, city_id, state_id, address, timezone) VALUES (:name, :code, :city_id, :state_id, :address, :timezone)');
-	$sth->execute(['name' => $item['name'], 'code' => $item['code'], 'city_id' => $cityId, 'state_id' => $stateId, 'address' =>  $item['address'], 'timezone' => $item['timezone']]);
+	$sth->bindValue(':name', $item['name']);
+	$sth->bindValue(':code', $item['code']);
+	$sth->bindValue(':city_id', $cityId);
+	$sth->bindValue(':state_id', $stateId);
+	$sth->bindValue(':address',  $item['address']);
+	$sth->bindValue(':timezone', $item['timezone']);
+	$sth->execute();
 }
